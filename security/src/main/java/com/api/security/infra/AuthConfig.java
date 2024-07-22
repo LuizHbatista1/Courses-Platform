@@ -1,6 +1,7 @@
 package com.api.security.infra;
 
 
+import jakarta.ws.rs.POST;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +34,7 @@ public class AuthConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST,"/register").permitAll()
                         .requestMatchers(HttpMethod.POST,"/login").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/courses").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter , UsernamePasswordAuthenticationFilter.class).build();
 

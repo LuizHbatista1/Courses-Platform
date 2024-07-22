@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.api.users"})
+@ComponentScan(basePackages = {"com.api.users , com.api.notifications , com.api.lessons , com.api.courses"})
 @PropertySource("file:security/.env")
 public class SecurityApplication {
 

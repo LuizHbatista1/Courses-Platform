@@ -32,6 +32,7 @@ public class User implements UserDetails {
     private String confirmPassword;
     private Double balance = 0.0;
     private Integer totalCourses = 0 ;
+    @Enumerated(EnumType.STRING)
     private RolesType role = RolesType.Common;
 
     public User(String firstName , String lastName , String email , String password , String confirmPassword) {
@@ -49,11 +50,11 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(this.role == RolesType.ADMIN){
 
-            return List.of(new SimpleGrantedAuthority("ADMIN") , new SimpleGrantedAuthority("COMMON"));
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN") , new SimpleGrantedAuthority("COMMON"));
 
         }
 
-        return List.of(new SimpleGrantedAuthority("COMMON"));
+        return List.of(new SimpleGrantedAuthority("ROLE_COMMON"));
     }
 
     @Override

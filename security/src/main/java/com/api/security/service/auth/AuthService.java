@@ -1,5 +1,8 @@
 package com.api.security.service.auth;
 
+import com.api.notifications.service.SesEmailSender;
+import com.api.security.infra.constants.BodyConstants;
+import com.api.security.infra.constants.SubjectConstants;
 import com.api.users.DTO.RegisterDTO;
 import com.api.users.domain.User;
 import com.api.users.repositories.UserRepository;
@@ -16,6 +19,9 @@ public class AuthService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private SesEmailSender sesEmailSender;
 
 
     @Override
@@ -35,7 +41,7 @@ public class AuthService implements UserDetailsService {
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         String encryptedConfirmPassword =  new BCryptPasswordEncoder().encode(data.confirmPassword());
-        User newUser = new User(data.firstName() , data.lastName(), data.email() , data.password() , data.confirmPassword());
+        User newUser = new User(data.firstName() , data.lastName(), data.email() , encryptedPassword , encryptedConfirmPassword);
         return userRepository.save(newUser);
 
 
